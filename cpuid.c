@@ -945,6 +945,23 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 		return kvm_skip_emulated_instruction(vcpu);
 }
 
+if (eax == 0x4FFFFFFE){
+			printk(KERN_INFO "EAX == 0x%x after kvm_cpuid()\n", eax);
+			eax = exit_counter;
+    		ecx = exit_delta_tsc & 0xffffffff;
+    		ebx = (exit_delta_tsc >> 32) & 0xffffffff;
+
+}else if(ecx != 0){
+		%eax = 0;
+		%ebx = 0;
+		%ecx = 0;
+		%edx = 0xFFFFFFFF;
+		return 0;
+}
+
+
+
+
 EXPORT_SYMBOL_GPL(kvm_emulate_cpuid);
 
 
